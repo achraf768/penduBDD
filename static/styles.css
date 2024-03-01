@@ -1,0 +1,51 @@
+body {
+    background-color: #222121;
+}
+
+.carte {
+    background-color: #dbd3d3;
+    max-width: 500px;
+    height: 300px;
+    margin: 100px auto;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+form {
+    color: #222121;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 60%;
+    margin: auto;
+}
+
+.carte form label {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.carte form input,button {
+    display: block;
+    margin: 30px auto;
+    padding: 5px;
+    width:60%;
+    border-radius: 5px;
+    border: none;
+}
+
+.carte form button {
+    background-color: #1a13ad;
+    color: #dbd3d3;
+}
+
+.carte form label,input,button {
+    display: block;
+    margin: 20px auto;
+    width:60%
+}
+
+h2 {
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 36px;
+}
+

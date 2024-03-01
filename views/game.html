@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME</title>
+</head>
+<body> 
+    <h1>Joueur : {{joueur}}</h1>
+    <h1>Difficulté : {{difficulte}}</h1>
+    <h1>Nombre de tentatives : {{nombre_tentatives}}</h1>
+    <h1>mot à deviner : {{mot_a_deviner}}</h1>
+    <h1>mot underscore : {{mot_underscore}}</h1>
+
+    
+    <form action="/game" method="POST">
+        <label for="lettre">Entrer une lettre :</label>
+        <input type="text" maxlength="1" id="lettre" name="lettre" pattern="[a-z]" title="seules les lettres sont autorisées" autofocus>
+        <button type="submit">valider</button>
+    </form>
+
+    {% if message_utilisateur%}
+    <p>{{message_utilisateur}}</p>
+    {% endif %}
+
+    {% if liste_lettres_utilisees %}
+        <h1>Liste des lettres déjà essayées : </h1>
+        <ul>
+            {% for lettre in liste_lettres_utilisees %}
+            <li>{{lettre}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

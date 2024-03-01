@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENDGAME</title>
+</head>
+<body>
+    <h2>FIN DE LA PARTIE</h2>
+    <p>{{message}}</p>
+
+    <ul>
+        <li>nom du joueur : {{name}}</li>
+        <li>Mot à deviner : {{mot_a_deviner}} </li>
+        <li>Nombre de tentatives : {{nombre_tentatives}} </li>
+        <li>lettres essayées : {{liste_lettres_utilisees}} </li>
+        <li>id_nom = {{id_nom}} </li>
+        <li>id_mot : {{id_mot}} </li>
+    </ul>
+
+    <a href="/level">Rejouer une partie</a>
+    <a href="/">page d'acceuil</a>
+
+    <!-- Le java script qui suit empeche le joueur de faire précédent  avec le navigateur -->
+    <script>
+        if (window.history && window.history.pushState) {
+            window.history.pushState('forward', null, './#forward');
+            window.onpopstate = function() {
+                window.history.pushState('forward', null, './#forward');
+            };
+        }
+    </script>
+    
+</body>
+</html>
