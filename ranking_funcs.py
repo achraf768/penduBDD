@@ -22,7 +22,7 @@ def recuperer_scores_decroissant():
                         select j.nom_joueur, p.score_partie, p.niveau_partie, DATE(p.date_heure_partie)
                         FROM partie p
                         join joueur j on p.id_joueur=j.id_joueur
-                        ORDER BY score_partie desc, j.nom_joueur
+                        ORDER BY score_partie desc, p.niveau_partie desc,j.nom_joueur
                    ''')
     scores = cursor.fetchall()
     connection.close()

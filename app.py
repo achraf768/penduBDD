@@ -57,6 +57,10 @@ def game():
         liste_lettres_utilisees= flask.session.get("liste_lettres_utilisees")
         nombre_vies= flask.session.get("nombre_vies")
         difficulte = flask.session.get("difficulte")
+        date_heure = datetime.datetime.now()
+        id_nom = flask.session.get("id_name")
+        id_mot = flask.session.get("id_mot")
+        message_final = "Vous avez perdu ! "  
 
         if nombre_vies == None:
             nombre_vies = 8
@@ -88,7 +92,16 @@ def game():
            mot_underscores=flask.session.get("mot_underscores")
             
         mot_underscores_avec_espaces = game_funcs.ajouter_espace_entre_chaque_lettre(mot_underscores)
-        return flask.render_template('game.html', difficulte=difficulte, mot_a_deviner=mot_a_deviner, joueur=name, mot_underscore= mot_underscores_avec_espaces, message_utilisateur=message_utilisateur, liste_lettres_utilisees=liste_lettres_utilisees, nombre_vies=nombre_vies)
+
+        if game_funcs.partie_terminee(nombre_vies, mot_underscores, mot_a_deviner):
+            partie_terminee = True
+            db_funcs.enregistrer_partie(id_mot, id_nom,difficulte,date_heure, nombre_vies,liste_lettres_utilisees)
+            if game_funcs.partie_gagnee(mot_underscores, mot_a_deviner):
+                message_final = "Vous avez gagné ! " 
+        else:
+            partie_terminee = False
+
+        return flask.render_template('game.html', difficulte=difficulte, mot_a_deviner=mot_a_deviner, joueur=name, mot_underscore= mot_underscores_avec_espaces, message_utilisateur=message_utilisateur, liste_lettres_utilisees=liste_lettres_utilisees, nombre_vies=nombre_vies, partie_terminee=partie_terminee, message_final=message_final)
     
     else:
         mot_a_deviner = flask.session.get("mot_a_deviner")
@@ -114,36 +127,9 @@ def game():
             nombre_vies -= 1
             flask.session["nombre_vies"]  = nombre_vies
 
-        
-        if game_funcs.partie_terminee(nombre_vies, mot_underscores, mot_a_deviner):
-            return flask.redirect('/endgame')  
-           
-
         return flask.redirect('/game')
 
 
-@app.route('/endgame', methods=['GET', 'POST'])
-def endgame():
-    if flask.request.method == 'GET':
-        name = flask.session.get("name")
-        mot_a_deviner = flask.session.get("mot_a_deviner")
-        mot_underscores = flask.session.get("mot_underscores")
-        liste_lettres_utilisees= flask.session.get("liste_lettres_utilisees")
-        nombre_vies= flask.session.get("nombre_vies")
-        id_nom = flask.session.get("id_name")
-        id_mot = flask.session.get("id_mot")
-        difficulte = flask.session.get("difficulte")
-        date_heure = datetime.datetime.now()
-
-        db_funcs.enregistrer_partie(id_mot, id_nom,difficulte,date_heure, nombre_vies,liste_lettres_utilisees)
-
-        if game_funcs.partie_gagnee(mot_underscores, mot_a_deviner):
-            message = "Vous avez gagné ! "
-        else:
-            message = "Vous avez perdu ! "  
-        
-        return flask.render_template('endgame.html', message=message, name=name, mot_a_deviner=mot_a_deviner, liste_lettres_utilisees=liste_lettres_utilisees, nombre_vies=nombre_vies, id_nom=id_nom, id_mot=id_mot)
-  
 
 @app.route('/ranking', methods=['GET', 'POST'])
 def ranking():

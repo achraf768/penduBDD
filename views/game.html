@@ -18,46 +18,67 @@
         <div class="trait1 forme-pendu"></div>
         <div class="trait2 forme-pendu"></div>
         {% if nombre_vies <= 7 %}
-        <div class="trait3 forme-pendu"></div>
+            <div class="trait3 forme-pendu"></div>
         {% endif %}
         {%if nombre_vies <=6 %}
-        <div class="trait4 forme-pendu"></div>
+            <div class="trait4 forme-pendu"></div>
         {% endif %}
         {%if nombre_vies <=5 %}
-        <div class="visage forme-pendu"></div>
+            <div class="visage forme-pendu"></div>
         {% endif %}
         {%if nombre_vies <=4 %}
-        <div class="coprs forme-pendu"></div>
+            <div class="coprs forme-pendu"></div>
         {% endif %}
         {%if nombre_vies <=3 %}
-        <div class="bras-gauche forme-pendu"></div>
+            <div class="bras-gauche forme-pendu"></div>
         {% endif %}
         {%if nombre_vies <=2 %}
-        <div class="bras-droit forme-pendu"></div>
+            <div class="bras-droit forme-pendu"></div>
         {% endif %}
         {%if nombre_vies <=1%}
-        <div class="jambe-gauche forme-pendu"></div>
+            <div class="jambe-gauche forme-pendu"></div>
         {% endif %}
         {%if nombre_vies <=0 %}
-        <div class="jambe-droite forme-pendu"></div>
+            <div class="jambe-droite forme-pendu"></div>
         {% endif %}
         
     </div>
-    <div class="underscores">{{mot_underscore}}</div>
     
     
-
-    <form action="/game" method="POST">
-        <label for="lettre">Entrer une lettre :</label>
-        <input type="text" maxlength="1" id="lettre" name="lettre" pattern="[a-z]" title="seules les lettres sont autorisées" autofocus>
-        <button type="submit">valider</button>
-    </form>
-
     
+    {% if not partie_terminee %}
+        <div class="underscores">{{mot_underscore}}</div>
+        <form action="/game" method="POST">
+            <label for="lettre">Entrer une lettre :</label>
+            <input type="text" maxlength="1" id="lettre" name="lettre" pattern="[a-z]" title="seules les lettres sont autorisées" autofocus>
+            <button type="submit">valider</button>
+        </form>
+        
 
-    {% if message_utilisateur%}
-    <p class="message">{{message_utilisateur}}</p>
+        
+
+        {% if message_utilisateur%}
+            <p class="message">{{message_utilisateur}}</p>
+        {% endif %}
+
+    {% else %}
+        <div class="underscores">{{mot_a_deviner}}</div>
     {% endif %}
+
+    {% if partie_terminee %}
+        <h2 class="end">FIN DE LA PARTIE</h2>
+        <p class="end">{{message_final}}</p>
+        <p></p>
+
+
+        <div class="div-links">
+            <a href="/level">Rejouer une partie</a>
+            <a href="/">page d'acceuil</a>
+            <a href="/ranking">Scores</a>
+        </div>
+        
+    {% endif %}
+
 
     
 

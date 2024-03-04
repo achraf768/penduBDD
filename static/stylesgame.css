@@ -139,3 +139,24 @@ form button {
     transform: rotate(60deg);
 }
 
+.end {
+    text-align: center;
+}
+
+.div-links {
+    width : 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.div-links a {
+    display: block;
+    width: 40%;
+    text-decoration: none;
+    background-color: #dbd3d3;
+    color: #222121;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 17px auto;
+
+}
