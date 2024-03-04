@@ -3,34 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/stylesgame.css">
     <title>GAME</title>
 </head>
 <body> 
-    <h1>Joueur : {{joueur}}</h1>
-    <h1>Difficulté : {{difficulte}}</h1>
-    <h1>Nombre de vies : {{nombre_vies}}</h1>
-    <h1>mot à deviner : {{mot_a_deviner}}</h1>
-    <h1>mot underscore : {{mot_underscore}}</h1>
-
+    <p>Joueur : {{joueur}}</p>
+    <p>Difficulté : {{difficulte}}</p>
+    <p>Nombre de vies : {{nombre_vies}}</p>
+    {% if liste_lettres_utilisees %}
+        <p>Lettres déjà essayées :{% for lettre in liste_lettres_utilisees %} <span> {{lettre}}</span> {% endfor %}</p>
+    {% endif %}
     
+    <div class="pendu">
+        <div class="trait1 forme-pendu"></div>
+        <div class="trait2 forme-pendu"></div>
+        {% if nombre_vies <= 7 %}
+        <div class="trait3 forme-pendu"></div>
+        {% endif %}
+        {%if nombre_vies <=6 %}
+        <div class="trait4 forme-pendu"></div>
+        {% endif %}
+        {%if nombre_vies <=5 %}
+        <div class="visage forme-pendu"></div>
+        {% endif %}
+        {%if nombre_vies <=4 %}
+        <div class="coprs forme-pendu"></div>
+        {% endif %}
+        {%if nombre_vies <=3 %}
+        <div class="bras-gauche forme-pendu"></div>
+        {% endif %}
+        {%if nombre_vies <=2 %}
+        <div class="bras-droit forme-pendu"></div>
+        {% endif %}
+        {%if nombre_vies <=1%}
+        <div class="jambe-gauche forme-pendu"></div>
+        {% endif %}
+        {%if nombre_vies <=0 %}
+        <div class="jambe-droite forme-pendu"></div>
+        {% endif %}
+        
+    </div>
+    <div class="underscores">{{mot_underscore}}</div>
+    
+    
+
     <form action="/game" method="POST">
         <label for="lettre">Entrer une lettre :</label>
         <input type="text" maxlength="1" id="lettre" name="lettre" pattern="[a-z]" title="seules les lettres sont autorisées" autofocus>
         <button type="submit">valider</button>
     </form>
 
+    
+
     {% if message_utilisateur%}
-    <p>{{message_utilisateur}}</p>
+    <p class="message">{{message_utilisateur}}</p>
     {% endif %}
 
-    {% if liste_lettres_utilisees %}
-        <h1>Liste des lettres déjà essayées : </h1>
-        <ul>
-            {% for lettre in liste_lettres_utilisees %}
-            <li>{{lettre}}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    
 
 </body>
 </html>

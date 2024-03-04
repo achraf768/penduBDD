@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/stylesRanking.css">
     <title>RANKING</title>
 </head>
 <body>
+    <main>
+        <h1>Scores</h1>
+        <div class="buttons">
+            <form action="" method="post">
+                <button type="submit" name="affichage_scores" value="meilleurs scores">Meilleurs Scores</button>
+                <button type="submit" name="affichage_scores" value="scores par ordre alphabétique">Scores par Ordre Alphabétique</button>
+                <button type="submit" name="affichage_scores" value="scores par difficulté">Scores par Difficulté</button>
+            </form>
+        </div>
+        
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Score</th>
+                    <th>Difficulté</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores_list %}
+                    <tr>
+                        <td>{{score[0]}}</td>
+                        <td>{{score[1]}}</td>
+                        <td>{{score[2]}}</td>
+                        <td>{{score[3]}}</td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </main>
     
 </body>
 </html>

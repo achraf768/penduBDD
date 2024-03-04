@@ -5,7 +5,7 @@ import datetime
 
 import game_funcs
 import db_funcs
-
+import ranking_funcs
 
 app= flask.Flask(__name__, template_folder="views", static_folder='static')
 app.secret_key = 'secret-key'
@@ -148,7 +148,35 @@ def endgame():
 @app.route('/ranking', methods=['GET', 'POST'])
 def ranking():
     if flask.request.method == 'GET':
-        pass
+        affichage_score = flask.session.get("affichage_scores")
+
+        if affichage_score == "scores par ordre alphabétique":
+            scores = ranking_funcs.recuperer_scores_nom_joueurs()
+        elif affichage_score == "scores par difficulté":
+            scores = ranking_funcs.recuperer_scores_niveau_puis_decroissant()
+        else:
+            scores = ranking_funcs.recuperer_scores_decroissant()
+
+        scores_list = []
+        for score in scores:
+            score = list(score)
+            score[0] = score[0].upper()
+            if score[2] == 1:
+                score[2] = "facile"
+            elif score[2] == 2:
+                score[2] = "moyen"
+            else:
+                score[2] = "difficile"
+            scores_list.append(score)
+
+
+        return flask.render_template('ranking.html', scores_list=scores_list)
+    
+    if flask.request.method == 'POST':
+        affichage_score = flask.request.form.get('affichage_scores')
+        flask.session["affichage_scores"] = affichage_score
+        return flask.redirect('/ranking')
+
 
 if __name__ == "__main__":
     app.run(debug=True)

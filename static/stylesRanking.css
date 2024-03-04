@@ -1,0 +1,42 @@
+body {
+    background-color: #222121;
+}
+
+main{
+    background-color: #dbd3d3;
+    max-width: 900px;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 40px 70px 70px 70px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black; 
+    padding: 8px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+button {
+    color: #222121;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin: 0 5px;
+}
