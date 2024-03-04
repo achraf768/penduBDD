@@ -40,8 +40,8 @@ def lettre_deja_dans_liste(lettre, liste_lettres):
     return False
 
 
-def partie_terminee(nombre_tentatives, mot_underscores, mot_a_deviner):
-    if nombre_tentatives > 7 or mot_a_deviner == mot_underscores:
+def partie_terminee(nombre_vies, mot_underscores, mot_a_deviner):
+    if nombre_vies <= 0 or mot_a_deviner == mot_underscores:
         return True
     return False
 
