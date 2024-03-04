@@ -145,5 +145,10 @@ def endgame():
         return flask.render_template('endgame.html', message=message, name=name, mot_a_deviner=mot_a_deviner, liste_lettres_utilisees=liste_lettres_utilisees, nombre_tentatives=nombre_tentatives, id_nom=id_nom, id_mot=id_mot)
   
 
+@app.route('/ranking', methods=['GET', 'POST'])
+def ranking():
+    if flask.request.method == 'GET':
+        pass
+
 if __name__ == "__main__":
     app.run(debug=True)

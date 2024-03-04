@@ -21,7 +21,7 @@ cursor.execute('''
         id_partie INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
         id_mot INTEGER NOT NULL,
         id_joueur INTEGER NOT NULL,
-        niveau_partie VARCHAR(50) NOT NULL,
+        niveau_partie TINYINT NOT NULL,
         date_heure_partie DATETIME NOT NULL,
         score_partie TINYINT NOT NULL,
         FOREIGN KEY(id_mot) REFERENCES mot(id_mot),

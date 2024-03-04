@@ -36,12 +36,20 @@ def recuperer_id_mot(mot):
 
 
 def enregistrer_partie(id_mot, id_joueur, niveau, date_heure, score,liste_lettres_utilisees):
+    if niveau == 'facile':
+        niveau_bdd = 1
+    elif niveau == 'moyen':
+        niveau_bdd = 2
+    else:
+        niveau_bdd = 3
+        
+
     connection = sqlite3.connect('bdd/ma_base.db')
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO partie (id_mot, id_joueur, niveau_partie, date_heure_partie, score_partie) values(?,?,?,?,?)', (id_mot, id_joueur, niveau, date_heure, score))
+    cursor.execute('INSERT INTO partie (id_mot, id_joueur, niveau_partie, date_heure_partie, score_partie) values(?,?,?,?,?)', (id_mot, id_joueur, niveau_bdd, date_heure, score))
     connection.commit()
 
-    cursor.execute('SELECT id_partie FROM partie WHERE id_mot = ? and id_joueur = ? and niveau_partie= ? and  date_heure_partie=? and score_partie=?', (id_mot, id_joueur, niveau, date_heure, score))
+    cursor.execute('SELECT id_partie FROM partie WHERE id_mot = ? and id_joueur = ? and niveau_partie= ? and  date_heure_partie=? and score_partie=?', (id_mot, id_joueur, niveau_bdd, date_heure, score))
     id_partie = cursor.fetchone()[0]
 
     for lettre in liste_lettres_utilisees:
