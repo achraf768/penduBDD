@@ -49,29 +49,12 @@ cursor.execute('''
 ''')
 connection.commit()
 
-cursor.execute('''INSERT INTO mot(label_mot) VALUES
-    ('chat'),
-    ('chien'),
-    ('ordinateur'),
-    ('maison'),
-    ('soleil'),
-    ('fleur'),
-    ('voiture'),
-    ('livre'),
-    ('internet'),
-    ('musique'),
-    ('python'),
-    ('restaurant'),
-    ('plage'),
-    ('football'),
-    ('bonjour'),
-    ('hiver'),
-    ('voyage'),
-    ('cafe'),
-    ('souris'),
-    ('telephone')
-''')
-connection.commit()
+with open('words.txt', 'r') as f:
+    mot = f.readline().strip()
+    while mot:
+        cursor.execute('INSERT INTO mot(label_mot) VALUES(?)', (mot,))
+        connection.commit()
+        mot = f.readline().strip()
 
 cursor.execute('''INSERT INTO lettre (label_lettre) VALUES
     ('a'), ('b'), ('c'), ('d'), ('e'), ('f'), ('g'), ('h'), ('i'), ('j'), ('k'), ('l'), ('m'),
